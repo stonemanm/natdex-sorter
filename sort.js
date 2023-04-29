@@ -1,15 +1,13 @@
 /**
- * checks if a given char is a-z or A-Z.
- * 
- * @param {char} c a string with only one element
+ * Loads and caches the data.
  */
-function is_lat_char(c) {
-    let ascii = c[0].charCodeAt(0);
-
-    if ((ascii > 96 && ascii < 123) || (ascii > 64 && ascii < 91)) {
-        return true;
-    }
-    return false;
+let cache = {};
+async function getData() {
+    if(cache !== {}) return cache;
+    await fetch("data/pokedex.json")
+        .then(response => response.json())
+        .then(json => cache = json);
+    return cache;
 }
 
 /**
@@ -18,30 +16,32 @@ function is_lat_char(c) {
  * @param {string} s the string to check
  * @returns {number} the natdex num
  */
-function natdex_num(s) {
-    fetch("data/pokedex.json").then(
-        (onResolved) => {
-            const json = require('data/pokedex.json');
-            const data = JSON.parse(json);
-
-            let match = data.find((val) => val.species === s);
-            return match.natdex;
-        
-        }, (onRejected) => {
-            return -1;
-        }
-    );
+function dexNum(s) {
+    let data = getData();
+    let match = data.find((val) => val.species === s);
+    return match.natdex;
 }
 
 /**
- * Checks if a string is smaller (alphabetically before) than another string.
+ * Checks if a given char is a-z or A-Z.
+ * 
+ * @param {char} c a string with only one element
+ */
+function isLatChar(c) {
+    let ascii = c[0].charCodeAt(0);
+    return ((ascii > 96 && ascii < 123) ||
+            (ascii > 64 && ascii < 91));
+}
+
+/**
+ * Checks if a string is smaller than (should come before) another string.
  * 
  * @param {string} lhs 
  * @param {string} rhs 
  */
-function is_smaller(lhs, rhs) {
-    let lhs_num = natdex_num(lhs);
-    let rhs_num = natdex_num(rhs);
+function isSmaller(lhs, rhs) {
+    let lhs_num = dexNum(lhs);
+    let rhs_num = dexNum(rhs);
     
     if (lhs_num !== -1 && rhs_num !== -1) {
         return lhs_num < rhs_num;
@@ -58,7 +58,7 @@ function is_smaller(lhs, rhs) {
                 const char_left = lhs[i];
                 const char_right = rhs[i];
 
-                if (is_lat_char(char_left) && is_lat_char(char_right)) {
+                if (isLatChar(char_left) && isLatChar(char_right)) {
                     // get ascii code from char
                     let left_ascii = char_left.charCodeAt(0);
                     let right_ascii = char_right.charCodeAt(0);
@@ -86,9 +86,22 @@ function is_smaller(lhs, rhs) {
                 }
             }
         }
-        // if two words are equal to the length of them return is_smaller based on the length
+        // if two words are equal to the length of them return isSmaller based on the length
         return lhs.length <= rhs.length;
     }
+}
+
+
+// The regex, which checks if a string contains only whitespace.
+const whitespace_regex = new RegExp("^[\\n\\r\\s]+$");
+
+/**
+ * Returns if a string is empty or contains only whitespace.
+ * 
+ * @param {string} str 
+ */
+function isWhitespace(str) {
+    return str.match(whitespace_regex) || !(str.length > 0);
 }
 
 /**
@@ -102,7 +115,7 @@ function merge(left, right) {
     // Break out of loop if any one of the array gets empty
     while (left.length && right.length) {
         // Pick the smaller among the smallest element of left and right sub arrays 
-        if (is_smaller(left[0], right[0])) {
+        if (isSmaller(left[0], right[0])) {
             arr.push(left.shift());
         } else {
             arr.push(right.shift());
@@ -118,7 +131,7 @@ function merge(left, right) {
  * Merge Sort from https://stackabuse.com/merge-sort-in-javascript/
  * @param {array} array 
  */
-function merge_sort(array) {
+function mergeSort(array) {
     const half = array.length / 2;
 
     // Base case or terminating case
@@ -126,21 +139,17 @@ function merge_sort(array) {
         return array;
     }
     const left = array.splice(0, half);
-    return merge(merge_sort(left), merge_sort(array));
+    return merge(mergeSort(left), mergeSort(array));
 }
 
 /**
- * the regex, which checks if a string contains only whitespace.
+ * Resets the form.
  */
-const whitespace_regex = new RegExp("^[\\n\\r\\s]+$");
-
-/**
- * returns if a strings contains only whitespace or is empty.
- * 
- * @param {string} str 
- */
-function is_whitespace(str) {
-    return str.match(whitespace_regex) || !(str.length > 0);
+function resetForm(form_id) {
+    var answer = window.confirm("Do you want to Reset the Input?");
+    if (answer) {
+        document.getElementById(form_id).reset();
+    }
 }
 
 /**
@@ -156,14 +165,14 @@ function sort(text) {
     // remove empty lines
     for (let i = 0; i < lines.length; i++) {
         const str = lines[i];
-        if (is_whitespace(str)) {
+        if (isWhitespace(str)) {
             lines.splice(i, 1);
             --i;
         }
     }
 
     // sort the array
-    let sorted = merge_sort(lines);
+    let sorted = mergeSort(lines);
 
     // combine sorted string array into single string
     let txt = "";
@@ -172,13 +181,4 @@ function sort(text) {
     });
 
     return txt;
-}
-
-
-
-function reset_form(form_id) {
-    var answer = window.confirm("Do you want to Reset the Input?");
-    if (answer) {
-        document.getElementById(form_id).reset();
-    }
 }
