@@ -3,11 +3,11 @@
  */
 let cache = {};
 async function getData() {
-    if(cache !== {}) return cache;
+    if(cache[pokedex] !== undefined) return cache[pokedex];
     await fetch("data/pokedex.json")
         .then(response => response.json())
         .then(json => cache = json);
-    return cache;
+    return cache[pokedex];
 }
 
 /**
