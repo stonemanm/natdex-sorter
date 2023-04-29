@@ -19,11 +19,18 @@ function is_lat_char(c) {
  * @returns {number} the natdex num
  */
 function natdex_num(s) {
-    const json = require('data/pokedex.json');
-    const data = JSON.parse(json);
-    
-    let match = data.find((val) => val.species === s);
-    return match.natdex;
+    fetch("data/pokedex.json").then(
+        (onResolved) => {
+            const json = require('data/pokedex.json');
+            const data = JSON.parse(json);
+
+            let match = data.find((val) => val.species === s);
+            return match.natdex;
+        
+        }, (onRejected) => {
+            return -1;
+        }
+    );
 }
 
 /**
