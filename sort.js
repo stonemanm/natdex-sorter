@@ -1,13 +1,10 @@
 /**
  * Loads and caches the data.
  */
-const cache = await fetch("data/pokedex.json")
-     .then(response => {
-         if (!response.ok) {
-             throw new Error("HTTP error ${response.status}");
-         }
-         return response.json();
-     });
+const cache = async () => {
+     const response = await fetch("data/pokedex.json");
+     return response.json();
+};
 
 /**
  * Get NatDex number for a given Pokémon.
