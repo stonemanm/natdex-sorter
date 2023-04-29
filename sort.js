@@ -1,14 +1,13 @@
 /**
  * Loads and caches the data.
  */
-let cache = {};
-async function getData() {
-    if(cache["pokedex"] !== undefined) return cache["pokedex"];
-    await fetch("data/pokedex.json")
-        .then(response => JSON.parse(response))
-        .then(json => cache = json);
-    return cache["pokedex"];
-}
+const cache = await fetch("data/pokedex.json")
+     .then(response => {
+         if (!response.ok) {
+             throw new Error("HTTP error ${response.status}");
+         }
+         return response.json();
+     });
 
 /**
  * Get NatDex number for a given Pokémon.
@@ -18,7 +17,7 @@ async function getData() {
  */
 function dexNum(s) {
     let data = getData();
-    let match = data.find((val) => val.species === s);
+    let match = data["pokedex"].find((val) => val.species === s);
     return match.natdex;
 }
 
