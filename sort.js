@@ -1,4 +1,4 @@
-import cache from 'data/pokedex.json' assert { type: 'json' };
+import data from 'data/pokedex.json' assert { type: 'json' };
 console.log(data);
 
 /**
@@ -8,8 +8,8 @@ console.log(data);
  * @returns {number} the natdex num
  */
 function dexNum(s) {
-    console.log(cache);
-    let match = cache["pokedex"].find((val) => val.species === s);
+    console.log(data);
+    let match = data["pokedex"].find((val) => val.species === s);
     return match.natdex;
 }
 
