@@ -10,7 +10,7 @@ const dex = [{"species":"abomasnow","natdex":460},{"species":"abra","natdex":63}
 function dexNum(s) {
     let match = dex.find((val) => val.species === s);
     console.log(match);
-    return (match === undefined) ? undefined : match.natdex;
+    return (match === undefined) ? -1 : match.natdex;
 }
 
 /**
