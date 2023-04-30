@@ -8,8 +8,8 @@ const dex = [{"species":"abomasnow","natdex":460},{"species":"abra","natdex":63}
  * @returns {number} the natdex num
  */
 function dexNum(s) {
-    console.log(dex);
     let match = dex.find((val) => val.species === s);
+    console.log(match);
     return match.natdex;
 }
 
