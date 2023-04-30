@@ -13,6 +13,7 @@ const cache = async () => {
  * @returns {number} the natdex num
  */
 function dexNum(s) {
+    console.log(cache);
     let match = cache["pokedex"].find((val) => val.species === s);
     return match.natdex;
 }
