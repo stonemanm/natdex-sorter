@@ -1,4 +1,4 @@
-import data from './data/pokedex.json' assert { type: 'json' };
+import data from "/data/pokedex.json" assert { type: 'json' };
 console.log(data);
 
 /**
