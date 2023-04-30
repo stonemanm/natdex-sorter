@@ -17,7 +17,7 @@ function toTitleCase(str) {
  * @returns {number} the natdex num
  */
 function dexNum(s) {
-    let match = dex.find((val) => val.species.toUpperCase() === s.toUpperCase()));
+    let match = dex.find((val) => val.species.toUpperCase() === s.toUpperCase());
     console.log(match);
     return (match === undefined) ? -1 : match.natdex;
 }
