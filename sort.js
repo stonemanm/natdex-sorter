@@ -179,7 +179,7 @@ function sort(text) {
     // combine sorted string array into single string
     let txt = "";
     sorted.forEach(str => {
-        txt += str + "\n";
+        txt += "<p>" + str + "</p>";
     });
 
     return txt;
