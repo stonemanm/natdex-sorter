@@ -24,50 +24,49 @@
     <!-- Custom JS -->
     <script src="./assets/custom/js/sort.js"></script>
 
-    <header>
-        <h1>Pokémon Sorter</h1>
-        <p>
-            Sorts lines of input by the Pokémon species listed in that line.<br>
-            Non-Pokémon lines will be placed at the bottom.
-        </p>
-    </header>
 
-    <form id="id_reset">
-        <div class="input_container">
-
-            <!-- Input Text to sort -->
-            <fieldset>
-                <legend>Input</legend>
-
-                <textarea id="id_in"
-                    oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
-            </fieldset>
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>Pokémon Sorter</h1>
+            <p class="lead">Sorts lines of input by the Pokémon species listed in that line.
+            <br>Non-Pokémon lines will be placed at the bottom.</p>
+        </div>
 
 
-            <div class="buttons">
-                <input type="button" value="Reset" onclick="reset_form('id_reset');">
+        <div class="buttons">
+            <input type="button" value="Reset" onclick="reset_form('id_reset');">
 
-                <input type="button" value="Sort"
-                    onclick="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);">
+            <input type="button" value="Sort"
+                onclick="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);">
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Input text to sort -->
+                <fieldset>
+                    <legend>Input</legend>
+
+                    <textarea id="id_in"
+                        oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
+                </fieldset>
             </div>
 
+            <div class="col-md-6">
+                <!-- Sorted output -->
+                <fieldset class="output_container">
+                    <legend>Sorted</legend>
 
-            <!-- Sorted Output -->
-            <fieldset class="output_container">
-                <legend>Sorted</legend>
-
-                <textarea id="id_out"></textarea>
-            </fieldset>
-
+                    <textarea id="id_out"></textarea>
+                </fieldset>
+            </div>
         </div>
-    </form>
 
-    <footer>
-        <a href="https://github.com/stonemanm/natdex-sorter">
-            View on GitHub
-            <img src="./assets/custom/img/GitHub-Mark-120px-plus.png"
-                height="24px" width="24px">
-        </a>
-    </footer>
-
+        <div class="page-footer">
+            <a href="https://github.com/stonemanm/natdex-sorter">
+                View on GitHub
+                <img src="./assets/custom/img/GitHub-Mark-120px-plus.png"
+                    height="24px" width="24px">
+            </a>
+        </div>
+    </div>
 </html>
