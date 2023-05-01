@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/svg+xml" href="./assets/custom/img/favicon.ico?" sizes="any">
@@ -13,8 +13,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./assets/custom/css/style.css">
-  </head>
-  <body>
+</head>
+<body>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 
@@ -36,21 +36,25 @@
             <div class="col-md-6">
                 <!-- Input text to sort -->
                 <div class="form-outline">
-                  <label class="form-label" for="id_in">Input</label>
-                  <textarea class="form-control" id="id_in" rows="12" oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
+                    <label class="form-label" for="id_in">Input</label>
+                    <textarea class="form-control" id="id_in" rows="12" oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="bd-clipboard">
+                    <button class="btn-clipboard" title="" data-original-title="Copy to clipboard">
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
 
-            <div class="col-md-6">                
                 <!-- Sorted output -->
                 <div class="form-outline">
-                  <label class="form-label" for="id_out">Output</label>
-                  <textarea class="form-control" id="id_out" rows="12" readonly></textarea>
+                    <label class="form-label" for="id_out">Output</label>
+                    <textarea class="form-control" id="id_out" rows="12" readonly></textarea>
                 </div>
-
-                <!-- <div class="bs-clipboard"><button type="button" class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</button></div> -->
             </div>
         </div>
+
         <div class="navbar navbar-fixed-bottom page-footer text-center">
             <a href="https://github.com/stonemanm/natdex-sorter">
                 View on GitHub
@@ -59,4 +63,5 @@
             </a>
         </div>
     </div>
+</body>
 </html>
