@@ -32,22 +32,13 @@
             <br>Non-Pokémon lines will be placed at the bottom.</p>
         </div>
 
-        <div class="buttons">
-            <input type="button" value="Reset" onclick="reset_form('id_reset');">
-
-            <input type="button" value="Sort"
-                onclick="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);">
-        </div>
-
         <div class="row">
             <div class="col-md-6">
                 <!-- Input text to sort -->
-                <fieldset>
-                    <legend>Input</legend>
-
-                    <textarea id="id_in"
-                        oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
-                </fieldset>
+                <div class="form-outline">
+                  <textarea class="form-control" id="id_in" rows="4" oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
+                  <label class="form-label" for="id_in">Input</label>
+                </div>
             </div>
 
             <div class="col-md-6">
