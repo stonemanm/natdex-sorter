@@ -36,19 +36,19 @@
             <div class="col-md-6">
                 <!-- Input text to sort -->
                 <div class="form-outline">
-                  <textarea class="form-control" id="id_in" rows="4" oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
+                  <textarea class="form-control" id="id_in" rows="8" oninput="document.getElementById('id_out').value = sort(document.getElementById('id_in').value);"></textarea>
                   <label class="form-label" for="id_in">Input</label>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="bs-clipboard"><button type="button" class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</button></div>
+            <div class="col-md-6">                
                 <!-- Sorted output -->
-                <fieldset class="output_container">
-                    <legend>Sorted</legend>
+                <div class="form-outline">
+                  <textarea class="form-control" id="id_out" rows="8" readonly></textarea>
+                  <label class="form-label" for="id_out">Output</label>
+                </div>
 
-                    <textarea id="id_out"></textarea>
-                </fieldset>
+                <!-- <div class="bs-clipboard"><button type="button" class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</button></div> -->
             </div>
         </div>
 
